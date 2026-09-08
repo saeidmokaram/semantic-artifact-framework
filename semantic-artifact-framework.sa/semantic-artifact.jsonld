@@ -1,0 +1,417 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "@base": "https://w3id.org/semantic-artifact/",
+    "@vocab": "https://w3id.org/semantic-artifact/vocab#",
+    "saf": "https://w3id.org/semantic-artifact/vocab#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "schema": "https://schema.org/",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "prof": "http://www.w3.org/ns/dx/prof/",
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "id": "@id",
+    "type": "@type",
+    "label": "schema:name",
+    "statement": "schema:description",
+    "status": "saf:epistemicStatus",
+    "review_status": "saf:reviewStatus",
+    "origin": "saf:origin",
+    "evidence_level": "saf:evidenceLevel",
+    "audiences": {
+      "@id": "saf:intendedAudience",
+      "@type": "@id"
+    },
+    "domains": {
+      "@id": "saf:domain",
+      "@type": "@id"
+    },
+    "relations": "saf:relation",
+    "external_relations": "saf:externalRelation",
+    "predicate": "saf:predicate",
+    "target": {
+      "@id": "saf:target",
+      "@type": "@id"
+    },
+    "artifact_id": {
+      "@id": "saf:artifact",
+      "@type": "@id"
+    },
+    "artifact_release": "saf:artifactRelease",
+    "object_id": {
+      "@id": "saf:object",
+      "@type": "@id"
+    },
+    "resolution": "saf:resolutionMode",
+    "integrity": "saf:integrity",
+    "mapping_id": {
+      "@id": "saf:mapping",
+      "@type": "@id"
+    },
+    "provenance": "saf:provenance",
+    "source": {
+      "@id": "prov:wasDerivedFrom",
+      "@type": "@id"
+    },
+    "locator": "saf:locator",
+    "basis": "saf:basis",
+    "version": "schema:version",
+    "tags": "schema:keywords",
+    "url": {
+      "@id": "schema:url",
+      "@type": "@id"
+    },
+    "created_by": {
+      "@id": "prov:wasAttributedTo",
+      "@type": "@id"
+    },
+    "contributor": {
+      "@id": "saf:contributor",
+      "@type": "@id"
+    },
+    "actors": "saf:actors",
+    "role": "saf:contributionRole",
+    "event_type": "saf:eventType",
+    "occurred_at": "saf:occurredAt",
+    "recorded_at": "dcterms:created",
+    "creation_method": "saf:creationMethod",
+    "related_event": {
+      "@id": "saf:relatedEvent",
+      "@type": "@id"
+    },
+    "change": "saf:semanticChange",
+    "before": "saf:beforeState",
+    "after": "saf:afterState",
+    "rationale": "saf:rationale",
+    "superseding_object": {
+      "@id": "saf:supersedingObject",
+      "@type": "@id"
+    },
+    "supersedes": {
+      "@id": "prov:wasRevisionOf",
+      "@type": "@id"
+    },
+    "safArtifact": "https://w3id.org/semantic-artifact/vocab#",
+    "canonicalKnowledge": {
+      "@id": "saf:canonicalKnowledge",
+      "@type": "@id"
+    },
+    "appendOnlyHistory": {
+      "@id": "saf:appendOnlyHistory",
+      "@type": "@id"
+    },
+    "linkedArtifact": {
+      "@id": "saf:linkedArtifact",
+      "@type": "@id"
+    },
+    "conformsTo": {
+      "@id": "dcterms:conformsTo",
+      "@type": "@id"
+    }
+  },
+  "@id": "work:from-documents-to-semantic-artifacts",
+  "@type": "saf:SemanticArtifact",
+  "title": "From Documents to Semantic Artifacts",
+  "format": "semantic-artifact-directory-package",
+  "format_version": "0.3.0-proposal",
+  "format_status": "The work is an idea and proposal originally presented in semantic knowledge form; the repository-local representation is one non-normative implementation",
+  "validation_status": "Proposal with structurally tested implementation mechanics; semantic accuracy, empirical benefit, cross-platform interoperability, performance, adoption, and standard maturity remain open",
+  "public_maturity_agenda": {
+    "status": "future-facing public community work",
+    "tracks": [
+      "related-work and novelty verification",
+      "adoption and incentives",
+      "security, privacy, consent, intellectual property and usage rights",
+      "cross-domain profiles, interoperability and standardisation maturity"
+    ],
+    "canonical_inclusion": "Governed by this artifact's declared governance profile"
+  },
+  "representation_policy": "Technology-neutral semantics with multimodal source preservation and explicit source-derivative links",
+  "package_profile": {
+    "name": "Semantic Artifact Directory Package",
+    "status": "proposed distribution profile",
+    "directory_suffix": ".sa",
+    "package_directory": "semantic-artifact-framework.sa",
+    "required_entries": {
+      "manifest": "semantic-artifact.jsonld",
+      "canonical_knowledge": "knowledge.jsonld",
+      "append_only_history": "history.jsonld"
+    },
+    "recognition": "A strict attached package is a visible directory whose name ends in .sa and which contains the three exact required entry names at its root.",
+    "content_validation": "A required filename is not sufficient: each entry must parse as JSON-LD and declare or structurally satisfy its assigned semantic role.",
+    "additional_entries": "Additional declared resources are permitted and do not become canonical knowledge merely by being present.",
+    "loose_file_import": "Tools may recognise renamed files from content as a migration convenience, but must normalise them before representing the result as a conforming directory package."
+  },
+  "conformance_shapes": "validation/saf-core.shacl.ttl",
+  "cross_artifact_policy": {
+    "capability_owner": "generic semantic-artifact framework",
+    "workspace_rule": "Multiple artifact releases may be queried together without merging their canonical states or authorities.",
+    "reference_modes": [
+      "live",
+      "pinned",
+      "materialized"
+    ],
+    "durable_joint_result": "A separately identified derived semantic artifact with explicit lineage and governance.",
+    "self_contained_export": "A portable semantic closure package selected by declared seeds and traversal policy, with source boundaries, unresolved dependencies and integrity information preserved."
+  },
+  "knowledge_medium_transition": "Prospective overlapping transition from document scarcity, through AI-abundant human-shaped documentation with persistent attention and capture bottlenecks, to knowledge-first artifacts with on-demand projections",
+  "interactive_gap_policy": "An unanswered query remains an explicit governed gap; routing, contribution, automated derivation, review and canonical incorporation follow the declared governance profile",
+  "output_lifecycle_policy": "Durable outputs identify their semantic snapshot and dependencies, remain historical records, support later currentness and impact checks, and feed results back only through explicit governed events",
+  "governance_profile": {
+    "profile": "author-controlled",
+    "founding_and_current_authority": "contributor:saeid-mokaram",
+    "canonical_repository_control": "Saeid Mokaram",
+    "submission": "External proposals may be received outside the canonical state; inclusion is not automatic",
+    "canonical_acceptance": "Saeid Mokaram reviews and decides acceptance, rejection, revision, correction, supersession and release for this semantic work instance",
+    "policy_change": "Must be recorded as an attributed, dated, non-erasing semantic change event",
+    "scope_note": "This is the current instance policy, not a required governance model for other semantic artifacts"
+  },
+  "language": "en-GB",
+  "canonical_stores": {
+    "semantic_state": "knowledge.jsonld",
+    "append_only_contribution_history": "history.jsonld"
+  },
+  "artifact_roles": [
+    "original semantic form",
+    "agent-to-agent handover package",
+    "reference framework and starter artifact for new Semantic Artifacts",
+    "source for open-ended governed projections",
+    "interactive exploration source"
+  ],
+  "current_demonstrator": {
+    "scope": "This work itself is the only current demonstrator",
+    "demonstrates": [
+      "semantic knowledge as the original form",
+      "agent-readable retrieval and policy",
+      "provenance-preserving non-erasing history",
+      "validation and projection from canonical semantic state",
+      "a fully generated paper as a presentation view"
+    ],
+    "excluded_from_current_scope": [
+      "separate software or code demonstrator",
+      "speech-processing handover case study",
+      "scientific experiment demonstrator"
+    ],
+    "future_options": "Practical code, project, and scientific-experiment validation studies may be added later."
+  },
+  "public_release_policy": {
+    "detailed_conversations": "excluded",
+    "verbatim_author_working_records": "excluded",
+    "curated_semantic_source_records": "included",
+    "local_search_index": "excluded and rebuildable",
+    "omission_rule": "Material evidential limitations caused by an omitted source MUST be declared."
+  },
+  "licensing_policy": {
+    "semantic_content": "CC-BY-4.0",
+    "required_credit": "Saeid Mokaram",
+    "commercial_use": "permitted without prior permission subject to the licence",
+    "changes": "must be identified",
+    "software_tools": "separate licence to be stated"
+  },
+  "identity_policy": {
+    "object_ids": "Stable IDs MUST NOT be reused for a different semantic object.",
+    "revision": "Meaning-changing updates MUST create a new revision and use supersedes.",
+    "source": "Raw sources are immutable evidence; corrections are separate annotations.",
+    "contribution_history": "Contribution events are append-only. Revision, challenge, correction, rejection, and supersession MUST be recorded as new events and MUST NOT delete earlier attribution."
+  },
+  "authority_order": [
+    "reviewed and accepted assertions in this work",
+    "direct and authoritative source evidence",
+    "reviewed proposed or contested assertions",
+    "unreviewed proposals",
+    "reader-agent derivations",
+    "reader-agent background knowledge"
+  ],
+  "core_files": [
+    "semantic-artifact.jsonld",
+    "knowledge.jsonld",
+    "history.jsonld"
+  ],
+  "reader_policy": {
+    "id": "policy:reader-agent-v0.2",
+    "version": "0.2.0",
+    "purpose": "Govern an AI agent that retrieves, explains, compares, or projects this work.",
+    "authority": {
+      "canonical_work": "The Semantic Artifact's canonical semantic state is the authoritative representation of what the work records at the declared snapshot. Reviewed and accepted objects have the highest interpretive authority, while proposed, contested, superseded and open objects remain represented with their status.",
+      "active_governance": "This semantic artifact uses author-controlled canonical acceptance by Saeid Mokaram. This instance policy is not a universal rule for other semantic artifacts.",
+      "external_knowledge": "External knowledge may contextualise the work but is not part of the work unless represented by an object and provenance record.",
+      "personal_opinion": "The reader agent MUST NOT add personal opinions or present preferences as facts."
+    },
+    "contribution_attribution_policy": {
+      "canonical_history": "history.jsonld is the append-only record of who performed an attributed semantic action, in what role, and when.",
+      "requirements": [
+        "Consult contribution events before stating who originated, synthesised, curated, reviewed, challenged, corrected, approved, or retracted an item.",
+        "Distinguish human intellectual contribution, automated assistance, review, adoption, curation, approval, and projected-publication authorship.",
+        "Do not infer contribution type or share from publication author order.",
+        "Automated tools and agentic systems are methods, not credited intellectual contributors.",
+        "When a human reviews and adopts an automated proposal, attribute the adopted idea to that human; review status records that the proposal was examined.",
+        "Do not identify a particular model, product, company, or service provider in authorship or contribution records.",
+        "If attribution is inferred, unresolved, disputed, corrected, or superseded, state that status.",
+        "Preserve earlier events; express a correction, rejection, challenge, or supersession through a later event and relationship."
+      ],
+      "default_presentation": [
+        "Contribution metadata is supporting provenance, not the main subject of the work.",
+        "Do not include a contribution or authorship section unless the reader asks about origin, authorship, review, adoption, or history.",
+        "Use ordinary bibliographic language when authorship is relevant: 'From Documents to Semantic Artifacts, by Saeid Mokaram' or 'The work by Saeid Mokaram'.",
+        "Do not introduce the work as 'human-reviewed', 'human-authored', 'attributed in the contribution record', or a 'working thesis'.",
+        "For ordinary explanations, identify Saeid Mokaram as the author at most once, then go directly to the work's ideas, evidence, implications, counterarguments, and applications.",
+        "Do not enumerate contribution-event identifiers in a general summary.",
+        "Do not display origin, review status, object type, or contribution method unless the reader asks for metadata or the distinction is necessary to prevent a materially misleading answer."
+      ]
+    },
+    "content_priority": [
+      "central problem and thesis",
+      "the current terminology and layer boundaries among the represented work, Semantic Artifact, Semantic Artifact Framework, canonical semantic state, append-only history, Semantic Artifact Directory Package, projections, derivatives, Explorer and Toolkit",
+      "the three-stage transition from document scarcity through AI-abundant human-shaped documentation to knowledge-first artifacts and on-demand projections",
+      "the unresolved reader-attention and full-journey-capture bottlenecks after document generation becomes cheap",
+      "the proposed historical-scale shift from final authored containers toward governed, source-linked, queryable semantic artifacts",
+      "AI-expanded practical capture of first-hand and process-level records as a hypothesis rather than a completeness guarantee",
+      "effective knowledge-expression capacity as distinct from raw channel bandwidth, generated volume, direct mental-state transfer, or guaranteed understanding",
+      "Neil D. Lawrence's human-machine communication constraint as external context and the semantic expression layer as this work's separately attributed extension",
+      "reader-side epistemic reconstruction that distinguishes represented sources and facts or factual assertions from attributed interpretations",
+      "the boundary between reconstructing a recorded journey and claiming literal reproduction of lived experience or uncaptured context",
+      "knowledge generated through human, agentic, or mixed work as the primary reusable outcome",
+      "the full in-scope journey from raw data, setup, code, trials, errors, and discussions to observations, interpretations, conclusions, and decisions",
+      "coexistence of source records, asserted facts, attributed perspectives, latent material, and explicit gaps",
+      "representation-technology neutrality and preservation of multimodal original sources when their form carries meaning",
+      "transcripts, OCR, embeddings, summaries, annotations, and model interpretations as traceable derivatives rather than replacements for their sources",
+      "documents, images, and interfaces as purpose- and context-specific projections, with code, actions, designs, and solutions as traceable derivatives",
+      "application-neutral core separated from domain profiles, application profiles, and concrete projection recipes",
+      "the Semantic Artifact as the original form of this work",
+      "the fully generated conference paper as a presentation projection and self-demonstrating example",
+      "the work itself as the only current demonstrator, with software and scientific cases explicitly deferred",
+      "agent-to-agent handover, including semantic artifacts distributed with software libraries",
+      "the Framework artifact as a machine-readable reference and starter for agents creating new Semantic Artifacts",
+      "open-ended governed projections including README, interactive, handover, audit, teaching, and domain-specific outputs",
+      "semantic-first personal and organisational workspaces built from heterogeneous sources",
+      "federated collaboration among people and teams through independently governed semantic artifacts",
+      "interactive knowledge dialogue and explicit routing of unanswered queries through a governed knowledge-gap clarification loop",
+      "the hypothesis that direct knowledge access may flatten some coordination while not replacing trust, negotiation, accountability, tacit interaction, management, or human contact",
+      "technology-team management as an application in which managers shift effort from information brokerage toward knowledge governance, judgement, prioritisation, conflict resolution, accountability and people development",
+      "management safeguards against surveillance, activity-as-performance measurement, false completeness and automated authority",
+      "traceable cross-artifact synthesis of requirements, evidence, constraints, capabilities, and solution candidates",
+      "need-specific and on-demand generation of reports, presentations, interfaces, tests, configurations, and code",
+      "semantic artifact model",
+      "agent-mediated discovery and generated projections",
+      "product-and-process memory and non-erasing evolution",
+      "cross-domain application",
+      "evidence, counterarguments, risks, and open questions",
+      "semantic capture and derivation fidelity, cross-platform conformance, and community evolution as unresolved research requirements",
+      "traceable output snapshots, currentness checks, task-dependent refresh, and explicit feedback incorporation",
+      "declared configurable governance, separation of contribution from canonical acceptance, and non-erasing policy change",
+      "explicit federation mappings and manual, automated, and interactive probeability without a completeness guarantee",
+      "related work and novelty, adoption, security, privacy, and rights as a public future-facing community research agenda",
+      "contribution metadata only when requested or materially relevant"
+    ],
+    "required_behaviour": [
+      "Retrieve relevant objects before answering substantive questions about the work.",
+      "Use the phrase 'the work proposes', 'the work defines', or equivalent attribution when describing original ideas.",
+      "Respect accepted, proposed, contested, superseded, illustrative, and open states internally; surface them only when requested or materially relevant.",
+      "Trace substantive claims to source objects and locators when available.",
+      "When a question concerns authorship or contribution, trace the answer to contribution events, contributor identifiers, roles, and times.",
+      "Distinguish raw or source material, measurements, observations, asserted facts, interpretations, conclusions, and derivations when the distinction affects the answer.",
+      "Distinguish an original text, audio, video, image, sketch, sensor record, or other source from every transcript, OCR result, embedding, summary, annotation, feature extraction, or interpretation derived from it.",
+      "Preserve exact expression when wording, voice, tone, timing, rhythm, gesture, visual form, ambiguity, or another feature of the original is part of the represented meaning.",
+      "Preserve explicit gaps and state when a relationship, intermediate step, or conclusion is not represented.",
+      "Consider linked counterarguments, risks, limitations, and domain qualifications.",
+      "Adapt terminology and depth to the requested audience without changing semantic meaning.",
+      "State when available evidence is absent, indirect, unverified, or insufficient.",
+      "Distinguish structural schema validity from semantic accuracy, completeness, empirical benefit, and interoperability evidence.",
+      "When assessing an earlier output, retrieve its generation time, semantic snapshot, input objects and versions, policies, external inputs, and validation or approval record before comparing it with current knowledge.",
+      "Report source changes and their possible impact without equating change detection with a decision that an output remains valid or must be regenerated.",
+      "Retrieve the active governance profile before proposing or applying a semantic change; distinguish technical write access, contribution permission, review authority, canonical acceptance, and legal responsibility.",
+      "For a federated answer, identify participating artifact states and retrieve the material mapping objects, transformation provenance, unresolved conflicts, and declared gaps before presenting the joint result.",
+      "When discussing maturity, separate this release's provisional public-release decisions from unresolved cross-domain related-work, adoption, security, privacy, consent, rights, and standardisation work.",
+      "When discussing historical significance, present the knowledge-medium and collaboration shift as the work's proposed potential, retrieve its evidence requirements and limitations, and do not report it as an established historical outcome.",
+      "When explaining the transition beyond documents, distinguish document-scarce, AI-abundant-document, and knowledge-first stages; state that they may coexist and are a proposed model rather than a deterministic historical law.",
+      "When an interactive query reveals missing knowledge, preserve the gap and apply the declared governance policy before routing it, accepting a contributor response, or presenting a labelled automated derivation.",
+      "When discussing flatter collaboration, retrieve the counterargument that collaboration exceeds information transfer and do not imply that meetings, management, negotiation, trust, accountability, tacit knowledge, or direct human interaction become unnecessary.",
+      "When discussing technology-team management, distinguish decision support from managerial authority, preserve the knowledge-gap loop and human responsibility, and retrieve surveillance, privacy, metric-abuse and team-trust risks.",
+      "When discussing communication bandwidth, identify Jean-Dominique Bauby as Lawrence's central locked-in example, distinguish Lawrence's source claim from this work's extension, and separate channel throughput, effective knowledge expression, semantic fidelity, and understanding.",
+      "Keep retrieved context bounded and prefer reviewed objects over unreviewed expansions."
+    ],
+    "derivation_policy": {
+      "allowed": true,
+      "requirements": [
+        "Prefix or otherwise clearly label a new conclusion as DERIVATION.",
+        "List the semantic object IDs and external facts used.",
+        "State the reasoning rule or inferential step in concise form.",
+        "Do not attribute the derivation to the work or its author.",
+        "Do not write the derivation into the canonical semantic state without author review."
+      ]
+    },
+    "external_context_policy": {
+      "allowed": true,
+      "requirements": [
+        "Label non-KB material as EXTERNAL CONTEXT.",
+        "Prefer primary or authoritative sources.",
+        "Do not use external context to silently repair, extend, or reinterpret an original claim."
+      ]
+    },
+    "prohibited_behaviour": [
+      "Do not claim that the work invented provenance, knowledge graphs, agent memory, event sourcing, generated documentation, or semantic publishing generally.",
+      "Do not attribute an unreviewed automated proposal to a human; human attribution begins when the proposal is explicitly reviewed and adopted.",
+      "Do not turn a confidence label into a probability unless the object explicitly defines one.",
+      "Do not hide counterevidence or counterarguments merely to produce a simpler narrative.",
+      "Do not expose sensitive omitted sources or infer their contents.",
+      "Do not silently invent a relationship, intermediate fact, or narrative bridge to make incomplete captured knowledge appear complete.",
+      "Do not treat an embedding, transcript, OCR result, summary, annotation, or current model interpretation as an exhaustive replacement for its original source.",
+      "Do not treat cryptographic provenance as proof that an assertion is true.",
+      "Do not describe the current proposal or its implementation as a validated, adopted, cross-platform, or performance-proven standard.",
+      "Do not claim that a semantic artifact literally reproduces another person's lived experience, exposes uncaptured or inaccessible context, or cleanly separates neutral facts from all mediation and interpretation.",
+      "Do not describe the proposed historical knowledge-medium shift as already demonstrated merely because the current work is self-represented in semantic form.",
+      "Do not present AI-abundant documentation as equivalent to comprehensive knowledge capture or claim that the proposed three-stage transition is historically inevitable.",
+      "Do not claim that a semantic artifact can answer beyond its represented and authorised knowledge, or that an unanswered query may be silently repaired before governance, attribution, and review.",
+      "Do not claim that semantic-first collaboration eliminates the need for meetings, management, negotiation, trust, accountability, tacit interaction, or responsible human judgement.",
+      "Do not use semantic activity records or automated inferences as sufficient evidence of employee contribution, value, performance, intent or employment suitability.",
+      "Do not attribute the proposed semantic expression layer to Neil D. Lawrence, substitute Stephen Hawking for Lawrence's Bauby example without a separate source, or treat machine information-transfer rate as proof of knowledge transfer or understanding.",
+      "Do not silently update, regenerate, approve, or declare a consequential historical output currently valid without its required tests and accountable domain review.",
+      "Do not infer semantic authority from repository permissions, contributor presence, authorship order, or the ability to submit a proposal.",
+      "Do not treat inspectable federation mappings or an absence of detected conflict as proof that inputs are complete, mappings are correct, or no hidden conflict exists.",
+      "Do not imply that public availability, CC BY licensing, or community participation resolves domain-specific security, privacy, consent, intellectual-property, cultural-authority, jurisdiction, or formal-standard requirements.",
+      "Do not equate semantic contribution records with eligibility for human authorship, employment credit, legal ownership, or responsibility unless the work's governance policy explicitly establishes that equivalence."
+    ],
+    "answer_contract": {
+      "minimum_internal_fields": [
+        "answer_mode",
+        "objects_used",
+        "counterarguments_considered",
+        "source_traces",
+        "uncertainties",
+        "derivations"
+      ],
+      "answer_modes": [
+        "work",
+        "projection",
+        "derivation",
+        "external-context",
+        "mixed"
+      ],
+      "natural_language_output": "May omit the field names, but MUST preserve their distinctions when relevant."
+    },
+    "retrieval_sequence": [
+      "Run search or context for the question and audience.",
+      "Get the highest-ranked reviewed claims and concepts.",
+      "Retrieve contribution events whenever the question concerns origin, authorship, collaboration, review, or historical change.",
+      "Expand supports, challenges, evidence, risks, examples, and source traces.",
+      "Answer using only the context required by the audience and question.",
+      "Explicitly mark any derivation or external addition."
+    ]
+  },
+  "linked_artifacts": [
+    {
+      "artifact_id": "work:semantic-artifact-toolkit",
+      "release": "0.1.0",
+      "manifest": "https://github.com/saeidmokaram/semantic-artifact-toolkit/blob/main/semantic-artifact.jsonld",
+      "relationship": "uses",
+      "authority": "independent linked semantic artifact"
+    },
+    {
+      "artifact_id": "work:semantic-artifact-explorer",
+      "release": "0.1.0",
+      "manifest": "https://github.com/saeidmokaram/semantic-artifact-explorer/blob/main/semantic-artifact-explorer.sa/semantic-artifact.jsonld",
+      "relationship": "hasOptionalView",
+      "authority": "independent external semantic artifact"
+    }
+  ]
+}

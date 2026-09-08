@@ -1,0 +1,26 @@
+.DS_Store
+.pnpm-store/
+node_modules/
+**/node_modules/
+**/dist/
+__pycache__/
+*.py[cod]
+.env
+.env.*
+!.env.example
+.dev.vars
+.dev.vars.*
+.wrangler/
+
+# Private/raw working records are intentionally excluded from public releases.
+/private/
+/sources/private/
+/sources/raw-conversations/
+/docs/source-conversation.md
+/docs/author-clarifications.md
+
+# Rebuildable local indexes and generated outputs are never canonical.
+/generated/
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal

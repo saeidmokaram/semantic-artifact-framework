@@ -1,0 +1,45 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix saf: <https://w3id.org/semantic-artifact/vocab#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix schema: <https://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# Proposed exchange shapes. They validate portable structure, not truth,
+# completeness, authority, safety, benefit or cross-platform behaviour.
+
+saf:SemanticObjectShape
+    a sh:NodeShape ;
+    # Every canonical semantic object declares review status. Targeting that
+    # property avoids treating nested manifest configuration that happens to
+    # contain a generic `status` key as a canonical semantic object.
+    sh:targetSubjectsOf saf:reviewStatus ;
+    sh:property [ sh:path schema:name ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path schema:description ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path saf:epistemicStatus ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path saf:reviewStatus ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path saf:origin ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path schema:version ; sh:minCount 1 ; sh:maxCount 1 ] .
+
+saf:ExternalRelationShape
+    a sh:NodeShape ;
+    sh:targetObjectsOf saf:externalRelation ;
+    sh:property [ sh:path saf:predicate ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path saf:artifact ; sh:minCount 1 ; sh:maxCount 1 ; sh:nodeKind sh:IRI ] ;
+    sh:property [ sh:path saf:object ; sh:minCount 1 ; sh:maxCount 1 ; sh:nodeKind sh:IRI ] ;
+    sh:property [
+        sh:path saf:resolutionMode ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:in ("live" "pinned" "materialized")
+    ] .
+
+saf:ContributionEventShape
+    a sh:NodeShape ;
+    sh:targetClass saf:ContributionEvent ;
+    sh:property [ sh:path saf:target ; sh:minCount 1 ; sh:maxCount 1 ; sh:nodeKind sh:IRI ] ;
+    sh:property [ sh:path saf:eventType ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path saf:occurredAt ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path dcterms:created ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path saf:creationMethod ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path saf:basis ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path schema:version ; sh:minCount 1 ; sh:maxCount 1 ] .

@@ -1,0 +1,76 @@
+name: Validate semantic artifact
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: semantic-artifact-validation-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install RDF validation tools
+        run: python -m pip install rdflib pyshacl
+
+      - name: Parse JSON-LD and validate proposed SHACL constraints
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from rdflib import Dataset
+          from pyshacl import validate
+
+          package = Path("semantic-artifact-framework.sa")
+          if package.suffix != ".sa":
+              raise SystemExit("Semantic Artifact package directory must end in .sa")
+          required = {
+              Path("README.md"), Path("AGENTS.md"), Path("LICENSE"),
+              package / "semantic-artifact.jsonld",
+              package / "knowledge.jsonld",
+              package / "history.jsonld",
+              package / "validation/saf-core.shacl.ttl",
+          }
+          missing = sorted(str(name) for name in required if not name.is_file())
+          if missing:
+              raise SystemExit(f"Missing package files: {missing}")
+
+          manifest = json.loads((package / "semantic-artifact.jsonld").read_text())
+          knowledge = json.loads((package / "knowledge.jsonld").read_text())
+          history = json.loads((package / "history.jsonld").read_text())
+          if not str(manifest.get("@type", "")).endswith("SemanticArtifact"):
+              raise SystemExit("semantic-artifact.jsonld does not declare the SemanticArtifact role")
+          if not str(knowledge.get("@type", "")).endswith("KnowledgeGraph"):
+              raise SystemExit("knowledge.jsonld does not declare the KnowledgeGraph role")
+          if not str(history.get("@type", "")).endswith("ContributionHistory"):
+              raise SystemExit("history.jsonld does not declare the ContributionHistory role")
+          profile = manifest.get("package_profile", {})
+          if profile.get("directory_suffix") != ".sa" or profile.get("package_directory") != package.name:
+              raise SystemExit("Manifest package profile does not match its .sa directory")
+
+          data = Dataset(default_union=True)
+          for name in ("semantic-artifact.jsonld", "knowledge.jsonld", "history.jsonld"):
+              data.parse(package / name, format="json-ld")
+
+          conforms, _, report = validate(
+              data_graph=data,
+              shacl_graph=str(package / "validation/saf-core.shacl.ttl"),
+              inference="none",
+              abort_on_first=False,
+          )
+          if not conforms:
+              raise SystemExit(report)
+          print(f"Parsed and validated {len(data)} RDF triples")
+          PY
