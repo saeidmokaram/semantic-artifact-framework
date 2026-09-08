@@ -10921,6 +10921,37 @@
       "basis": "corrective-registration",
       "note": "Registers the previously embedded v0.1 reader policy as an addressable historical semantic object so its existing supersession event has a valid target.",
       "version": 1
+    },
+    {
+      "@id": "contribution:aligned-policy-reader-agent-v0.2-version",
+      "@type": "ContributionEvent",
+      "target": "policy:reader-agent-v0.2",
+      "event_type": "corrected",
+      "actors": [
+        {
+          "contributor": "contributor:saeid-mokaram",
+          "role": "approver"
+        }
+      ],
+      "creation_method": "automated-assistance",
+      "occurred_at": "2026-09-08",
+      "recorded_at": "2026-09-08",
+      "attribution_confidence": "explicit",
+      "basis": "validation-detected-metadata-alignment",
+      "note": "Aligns the addressable policy object's version with the embedded active reader policy so the two representations identify one semantic version and satisfy the single-version constraint.",
+      "version": 1,
+      "change": {
+        "fields": [
+          "version"
+        ],
+        "before": {
+          "version": 1
+        },
+        "after": {
+          "version": "0.2.0"
+        },
+        "rationale": "The manifest and knowledge graph use the same policy identity; different schema:version values caused an invalid merged RDF node even though both represented reader policy v0.2."
+      }
     }
   ]
 }
