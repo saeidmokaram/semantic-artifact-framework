@@ -22,11 +22,11 @@ The canonical artifact is contained by [`semantic-artifact-framework.sa/`](seman
 
 ## Use it with an AI assistant
 
-[`AGENTS.md`](AGENTS.md) is the provider-neutral instruction and loading entry point. Some coding agents discover this filename automatically, but general AI chats may not. Give the assistant this repository URL and use the following instruction:
+[`AGENTS.md`](AGENTS.md) is the provider-neutral instruction and loading entry point. Some coding agents discover this filename automatically, but general AI chats may not. In any assistant that can access public GitHub repositories, begin with this single instruction:
 
-> Load this repository as a Semantic Artifact. Read `AGENTS.md` first and follow its loading sequence and operating rules. Treat the `.sa` package as the represented work and the README as orientation only. Do not fill an inaccessible file or missing knowledge with assumptions; tell me what you could not access. After loading, identify the artifact you found and ask what I want to understand, compare, project or develop.
+> Load and follow the Semantic Artifact at https://github.com/saeidmokaram/semantic-artifact-framework, starting with `AGENTS.md`; confirm the artifact identity and report any required file you cannot access, then wait for my task.
 
-If the assistant cannot read a public repository, upload `AGENTS.md` together with the complete `semantic-artifact-framework.sa/` directory, or upload its three required files while preserving their names and roles. No particular AI provider, model or chat product is required.
+The assistant should fetch the repository and follow `AGENTS.md` into the `.sa` package; the README alone is not the represented knowledge. If the assistant cannot read a public repository, upload `AGENTS.md` together with the complete `semantic-artifact-framework.sa/` directory, or upload its three required files while preserving their names and roles. No particular AI provider, model or chat product is required.
 
 To start a new artifact, copy the `.sa` directory structure as `<work-name>.sa/`, assign a new identity and governance profile, and replace the canonical knowledge and history with records belonging to the new work. Loose renamed files are import material, not a conforming strict package, until normalised.
 
