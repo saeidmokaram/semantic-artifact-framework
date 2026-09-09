@@ -10952,6 +10952,40 @@
         },
         "rationale": "The manifest and knowledge graph use the same policy identity; different schema:version values caused an invalid merged RDF node even though both represented reader policy v0.2."
       }
+    },
+    {
+      "@id": "contribution:revised-policy-reader-agent-v0.2-self-contained-bootstrap",
+      "@type": "ContributionEvent",
+      "target": "policy:reader-agent-v0.2",
+      "event_type": "revised",
+      "actors": [
+        {
+          "contributor": "contributor:saeid-mokaram",
+          "role": "originator"
+        }
+      ],
+      "creation_method": "human",
+      "occurred_at": "2026-09-09",
+      "recorded_at": "2026-09-09",
+      "attribution_confidence": "explicit",
+      "basis": "direct-attribution",
+      "note": "The author required the standing reader instructions to use represented counterarguments and provide semantic object identifiers, so users do not need to repeat this constraint in every prompt.",
+      "version": 1,
+      "change": {
+        "fields": [
+          "statement",
+          "version",
+          "reader_policy.required_behaviour",
+          "reader_policy.prohibited_behaviour"
+        ],
+        "before": {
+          "version": "0.2.0"
+        },
+        "after": {
+          "version": "0.2.1"
+        },
+        "rationale": "Make the public entry self-contained, keep the initiation prompt minimal, and prevent general model analysis from being misrepresented as counterarguments contained in the work."
+      }
     }
   ]
 }

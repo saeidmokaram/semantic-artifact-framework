@@ -20,6 +20,8 @@ When a chat or agent can read this repository's small files but cannot retrieve 
 - Label new reasoning as a derivation and identify its input object IDs. Label outside information as external context.
 - Preserve the distinction among source material, observations, asserted facts, interpretations, conclusions and generated outputs.
 - Preserve explicit gaps, disagreements, uncertainty, counterarguments and superseded states.
+- When asked for the work's claims, counterarguments, evidence or risks, retrieve the corresponding represented objects. Do not replace the artifact's counterarguments with newly generated objections. Put relevant semantic object IDs in a compact trace after the ordinary-language answer rather than making metadata the main presentation.
+- If the user explicitly requests additional criticism, hypotheses or alternatives beyond the represented artifact, separate and label them as derivation or external context in accordance with the manifest policy.
 - Do not treat a projection, generated answer, mapping or implementation behaviour as canonical knowledge unless an attributed event accepts it under the declared governance policy.
 - Do not infer authority from repository access, author order, tool use or the ability to propose a change.
 - Structural validation does not prove semantic accuracy, completeness, safety, benefit or interoperability.
