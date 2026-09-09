@@ -22,11 +22,13 @@ The canonical artifact is contained by [`semantic-artifact-framework.sa/`](seman
 
 ## Use it with an AI assistant
 
-[`AGENTS.md`](AGENTS.md) is the provider-neutral instruction and loading entry point. Some coding agents discover this filename automatically, but general AI chats may not. In any assistant that can access public GitHub repositories, begin with this single instruction:
+The generated web entry is the provider-neutral loading point for general AI chats. Begin with this single instruction:
 
-> Load and follow the Semantic Artifact at https://github.com/saeidmokaram/semantic-artifact-framework, starting with `AGENTS.md`; confirm the artifact identity and report any required file you cannot access, then wait for my task.
+> Load and follow the Semantic Artifact at https://saeidmokaram.github.io/semantic-artifact-framework/agent/, then wait for my task.
 
-The assistant should fetch the repository and follow `AGENTS.md` into the `.sa` package; the README alone is not the represented knowledge. If its web tools cannot retrieve the large canonical files, `AGENTS.md` directs it to a [generated, hash-bound access projection](https://saeidmokaram.github.io/semantic-artifact-framework/agent/) that exposes a compact catalog, individual semantic objects and per-object history through both browser-readable HTML and machine-readable JSON. If the assistant cannot read either public location, upload `AGENTS.md` together with the complete `semantic-artifact-framework.sa/` directory, or upload its three required files while preserving their names and roles. No particular AI provider, model or chat product is required.
+That entry contains the compact operating contract, manifest, type catalogues, individual semantic objects and per-object history in both browser-readable HTML and machine-readable JSON. It instructs the assistant to retrieve the represented claims and counterarguments, preserve their status and distinguish any new derivation or external context without requiring those directions in every later question.
+
+Repository-aware coding agents may instead discover and follow [`AGENTS.md`](AGENTS.md) automatically. If the web entry is unavailable but the assistant can retrieve public GitHub files, instruct it to load this repository starting with `AGENTS.md`. The README alone is not the represented knowledge. If neither public route is accessible, upload `AGENTS.md` together with the complete `semantic-artifact-framework.sa/` directory, or upload its three required files while preserving their names and roles. No particular AI provider, model or chat product is required.
 
 To start a new artifact, copy the `.sa` directory structure as `<work-name>.sa/`, assign a new identity and governance profile, and replace the canonical knowledge and history with records belonging to the new work. Loose renamed files are import material, not a conforming strict package, until normalised.
 

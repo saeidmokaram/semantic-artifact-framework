@@ -45,7 +45,10 @@ jobs:
           entry = json.loads((site / "agent/index.json").read_text())
           catalog = json.loads((site / "agent/catalog/index.json").read_text())
           assert entry["projection_status"] == "generated-noncanonical-access-projection"
+          assert entry["projection_version"] == "0.2.0"
           assert entry["artifact"]["id"] == "work:from-documents-to-semantic-artifacts"
+          assert isinstance(entry["operating_contract"], list)
+          assert any("counterarguments" in rule for rule in entry["operating_contract"])
           assert entry["counts"]["knowledge_objects"] == catalog["total_objects"]
           checked = 0
           for shard_ref in catalog["catalog_shards"]:

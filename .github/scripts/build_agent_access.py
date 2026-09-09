@@ -13,7 +13,7 @@ from pathlib import Path
 from typing import Any
 
 
-PROJECTION_VERSION = "0.1.0"
+PROJECTION_VERSION = "0.2.0"
 REQUIRED_FILES = (
     "semantic-artifact.jsonld",
     "knowledge.jsonld",
@@ -353,6 +353,14 @@ def main() -> None:
             "Retrieve per-object history when origin, review, authority or change matters.",
             "Preserve the distinction between canonical content and this generated access projection.",
         ],
+        "operating_contract": [
+            "Treat the identified .sa package as canonical; this site is only its hash-bound access projection.",
+            "Read the manifest and apply its reader_policy before answering substantive questions.",
+            "Retrieve relevant represented objects and follow material relations, evidence, counterarguments and history.",
+            "For claims, counterarguments, evidence or risks, use represented objects and include their IDs in a compact trace; do not substitute newly generated analysis.",
+            "Label new reasoning as DERIVATION with its input object IDs; label outside material as EXTERNAL CONTEXT.",
+            "Preserve explicit gaps, uncertainty, disagreement and superseded state; report inaccessible required resources.",
+        ],
     }
 
     write_json(agent_root / "index.json", entry)
@@ -472,23 +480,24 @@ def main() -> None:
         "Semantic Artifact agent entry",
         "<p>This is a generated, noncanonical retrieval projection. Read the "
         "manifest, select relevant catalog shards, retrieve the required objects, "
-        "and follow their references and history links.</p><ul>"
+        "and follow their references and history links.</p><h2>Operating contract</h2><ol>"
+        + "".join(
+            f"<li>{html.escape(rule)}</li>" for rule in entry["operating_contract"]
+        )
+        + "</ol><h2>Resources</h2><ul>"
         + entry_links
         + "</ul><h2>Entry metadata</h2><pre>"
         + html.escape(json.dumps(entry, ensure_ascii=False, indent=2, sort_keys=True))
         + "</pre>",
     )
 
-    bootstrap = (
-        f"Load and follow the Semantic Artifact at {repository_url}, starting with "
-        "AGENTS.md. If the canonical knowledge or history files cannot be fetched, "
-        f"use the generated access projection at {base_url}/. Confirm the "
-        "artifact identity and snapshot, report inaccessible required resources, and "
-        "then wait for the user's task."
-    )
+    bootstrap = f"Load and follow the Semantic Artifact at {base_url}/, then wait for my task."
     (output / "llms.txt").write_text(
         "# Semantic Artifact Framework — agent access\n\n"
         + bootstrap
+        + "\n\n"
+        + "Operating contract:\n"
+        + "\n".join(f"- {rule}" for rule in entry["operating_contract"])
         + "\n\n"
         + f"Web entry: {base_url}/\n"
         + f"JSON entry: {base_url}/index.json\n"

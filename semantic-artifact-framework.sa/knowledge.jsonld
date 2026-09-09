@@ -20165,7 +20165,7 @@
       "@id": "policy:reader-agent-v0.2",
       "@type": "Policy",
       "label": "Reader-agent policy v0.2",
-      "statement": "The active reader-agent policy embedded in semantic-artifact.jsonld, including current Semantic Artifact terminology, attribution, epistemic, governance, retrieval and projection requirements.",
+      "statement": "The active reader-agent policy embedded in semantic-artifact.jsonld, including current Semantic Artifact terminology, attribution, epistemic, governance, retrieval and projection requirements. For questions about claims, counterarguments, evidence, or risks, the reader uses represented objects, provides their identifiers in a compact trace, and does not substitute newly generated objections for represented counterarguments; requested additional analysis remains explicitly labelled as derivation or external context.",
       "status": "accepted",
       "review_status": "author-reviewed",
       "origin": "human",
@@ -20180,7 +20180,7 @@
       ],
       "provenance": [],
       "tags": ["reader-policy", "governance", "active-policy"],
-      "version": "0.2.0"
+      "version": "0.2.1"
     }
   ]
 }

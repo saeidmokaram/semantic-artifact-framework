@@ -229,7 +229,7 @@
   ],
   "reader_policy": {
     "id": "policy:reader-agent-v0.2",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "purpose": "Govern an AI agent that retrieves, explains, compares, or projects this work.",
     "authority": {
       "canonical_work": "The Semantic Artifact's canonical semantic state is the authoritative representation of what the work records at the declared snapshot. Reviewed and accepted objects have the highest interpretive authority, while proposed, contested, superseded and open objects remain represented with their status.",
@@ -305,6 +305,7 @@
     ],
     "required_behaviour": [
       "Retrieve relevant objects before answering substantive questions about the work.",
+      "When asked for the work's claims, counterarguments, evidence, or risks, use the corresponding represented objects and provide their semantic object IDs in a compact trace after the ordinary-language answer; do not substitute newly generated analysis for the artifact's represented counterarguments.",
       "Use the phrase 'the work proposes', 'the work defines', or equivalent attribution when describing original ideas.",
       "Respect accepted, proposed, contested, superseded, illustrative, and open states internally; surface them only when requested or materially relevant.",
       "Trace substantive claims to source objects and locators when available.",
@@ -353,6 +354,7 @@
       "Do not attribute an unreviewed automated proposal to a human; human attribution begins when the proposal is explicitly reviewed and adopted.",
       "Do not turn a confidence label into a probability unless the object explicitly defines one.",
       "Do not hide counterevidence or counterarguments merely to produce a simpler narrative.",
+      "Do not present a newly generated objection as one of the work's counterarguments; if the user requests additional criticism, hypotheses, or alternatives, label them as a derivation or external context and keep them separate from represented objects.",
       "Do not expose sensitive omitted sources or infer their contents.",
       "Do not silently invent a relationship, intermediate fact, or narrative bridge to make incomplete captured knowledge appear complete.",
       "Do not treat an embedding, transcript, OCR result, summary, annotation, or current model interpretation as an exhaustive replacement for its original source.",
