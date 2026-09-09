@@ -10,6 +10,10 @@ This repository contains the strict Semantic Artifact Directory Package `semanti
 4. Consult `semantic-artifact-framework.sa/history.jsonld` whenever origin, contribution, review, authority, correction, supersession or historical state is material.
 5. Inspect linked artifacts only when relevant and preserve every artifact's identity, release, governance and authority boundary.
 
+## Public web fallback
+
+When a chat or agent can read this repository's small files but cannot retrieve the large canonical knowledge or history files, use the generated agent-access projection at `https://saeidmokaram.github.io/semantic-artifact-framework/agent/index.json`. Confirm its artifact identity and Git snapshot, use its catalog to retrieve only the relevant object resources, and follow per-object history links when history is material. Verify the declared hashes when the canonical bytes are accessible; otherwise disclose reliance on the hash-bound projection. Treat every resource at that endpoint as a generated, noncanonical retrieval projection of the identified `.sa` package, not as another source of meaning. Report any inaccessible resource or integrity mismatch instead of filling the gap with assumptions.
+
 ## Operating rules
 
 - Treat the represented work as the source of its claims; do not silently add model opinion or background knowledge.
