@@ -52,12 +52,15 @@ jobs:
               shard_name = shard_ref["url"].rsplit("/", 1)[-1]
               shard = json.loads((site / "agent/catalog" / shard_name).read_text())
               assert shard_ref["count"] == len(shard["objects"])
+              assert (site / "agent/catalog" / shard_ref["web_url"].rsplit("/", 1)[-1]).is_file()
               for item in shard["objects"]:
                   name = item["object_url"].rsplit("/", 1)[-1]
                   assert (site / "agent/objects" / name).is_file()
+                  assert (site / "agent/objects" / item["object_web_url"].rsplit("/", 1)[-1]).is_file()
                   if "history_url" in item:
                       history_name = item["history_url"].rsplit("/", 1)[-1]
                       assert (site / "agent/history" / history_name).is_file()
+                      assert (site / "agent/history" / item["history_web_url"].rsplit("/", 1)[-1]).is_file()
                   checked += 1
           assert checked == catalog["total_objects"]
           print(f"Checked {checked} indexed object resources")
