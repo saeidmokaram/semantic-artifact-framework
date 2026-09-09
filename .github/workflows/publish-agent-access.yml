@@ -38,17 +38,39 @@ jobs:
       - name: Check generated entry and resources
         run: |
           python - <<'PY'
+          import hashlib
           import json
+          import zipfile
           from pathlib import Path
 
           site = Path("_site")
           entry = json.loads((site / "agent/index.json").read_text())
           catalog = json.loads((site / "agent/catalog/index.json").read_text())
+          distribution = json.loads((site / "downloads/distribution.json").read_text())
+          archive = site / "downloads" / distribution["package"]["archive_filename"]
+          archive_sha256 = hashlib.sha256(archive.read_bytes()).hexdigest()
           assert entry["projection_status"] == "generated-noncanonical-access-projection"
-          assert entry["projection_version"] == "0.2.0"
+          assert entry["projection_version"] == "0.3.0"
           assert entry["artifact"]["id"] == "work:from-documents-to-semantic-artifacts"
           assert isinstance(entry["operating_contract"], list)
           assert any("counterarguments" in rule for rule in entry["operating_contract"])
+          assert archive.is_file()
+          assert archive_sha256 == distribution["package"]["sha256"]
+          assert archive_sha256 == entry["package_archive_sha256"]
+          assert archive.stat().st_size == distribution["package"]["size_bytes"]
+          assert entry["package_download_url"] == distribution["package"]["download_url"]
+          assert (site / "downloads/SHA256SUMS").read_text().split()[0] == archive_sha256
+          with zipfile.ZipFile(archive) as package_zip:
+              members = package_zip.namelist()
+              assert members == distribution["package"]["members"]
+              required = {
+                  "semantic-artifact-framework.sa/semantic-artifact.jsonld",
+                  "semantic-artifact-framework.sa/knowledge.jsonld",
+                  "semantic-artifact-framework.sa/history.jsonld",
+              }
+              assert required.issubset(members)
+              assert all(name.startswith("semantic-artifact-framework.sa/") for name in members)
+              assert all(info.date_time == (1980, 1, 1, 0, 0, 0) for info in package_zip.infolist())
           assert entry["counts"]["knowledge_objects"] == catalog["total_objects"]
           checked = 0
           for shard_ref in catalog["catalog_shards"]:

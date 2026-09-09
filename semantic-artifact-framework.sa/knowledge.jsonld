@@ -19441,7 +19441,7 @@
       "@id": "decision:minimal-public-semantic-artifact-package",
       "@type": "Decision",
       "label": "Keep the public Semantic Artifact package minimal and self-describing",
-      "statement": "The current attached exchange profile places the manifest, canonical semantic state and append-only semantic history under one visible, work-named directory ending in .sa. The three role files use the exact names semantic-artifact.jsonld, knowledge.jsonld and history.jsonld so tools can discover them deterministically; content validation must also confirm that each file satisfies its named role. Short human and agent access adapters may remain at a host repository boundary where existing platforms need them, but they are not additional canonical knowledge stores. A licence and machine-validation resources are supporting infrastructure. Research working records, release instructions, generated projections, evaluation outputs and implementation tools are not duplicated in the package; when retained, they are separate linked artifacts, releases or repositories with their own identity and lifecycle. Loose renamed files may be imported by content and normalised, while strict .sa packages require the fixed internal names. This is a proposed distribution profile and current repository convention, not a universal definition of Semantic Artifact meaning or a requirement to use JSON-LD, directories or Git in every implementation.",
+      "statement": "The current attached exchange profile places the manifest, canonical semantic state and append-only semantic history under one visible, work-named directory ending in .sa. The three role files use the exact names semantic-artifact.jsonld, knowledge.jsonld and history.jsonld so tools can discover them deterministically; content validation must also confirm that each file satisfies its named role. Short human and agent access adapters may remain at a host repository boundary where existing platforms need them, but they are not additional canonical knowledge stores. A licence and machine-validation resources are supporting infrastructure. Research working records, release instructions, generated projections, evaluation outputs and implementation tools are not duplicated in the package; when retained, they are separate linked artifacts, releases or repositories with their own identity and lifecycle. Loose renamed files may be imported by content and normalised, while strict .sa packages require the fixed internal names. For transport without Git, a host may reproducibly serialize the complete directory as <work-name>.sa.zip and publish a machine-readable descriptor containing identity, snapshot, download URL, media type, size, member list and SHA-256 hash. Extraction must restore the unchanged .sa root and required entries; the archive and descriptor remain transport resources rather than independent canonical stores. This is a proposed distribution profile and current repository convention, not a universal definition of Semantic Artifact meaning or a requirement to use JSON-LD, directories, ZIP or Git in every implementation.",
       "status": "accepted",
       "review_status": "author-reviewed",
       "origin": "human",
@@ -19499,7 +19499,7 @@
         "separation-of-concerns",
         "non-normative-layout"
       ],
-      "version": 2
+      "version": 3
     },
     {
       "@id": "source:author-proposal-sa-directory-package",
@@ -19541,7 +19541,7 @@
       "@id": "concept:semantic-artifact-directory-package",
       "@type": "Concept",
       "label": "Semantic Artifact Directory Package",
-      "statement": "A strict attached distribution of one Semantic Artifact as a visible directory whose work-specific name ends in .sa and whose root contains semantic-artifact.jsonld, knowledge.jsonld and history.jsonld with those exact role names. The manifest is the package marker and declares identity, release, governance, profile, components and optional supporting resources; filenames enable deterministic discovery while content types and structure prevent misclassification. Additional declared resources may be present without becoming canonical merely through inclusion. Tools may offer a separate content-aware import path for renamed loose files and then generate a normalised .sa package. The directory profile packages a Semantic Artifact but does not define its technology-neutral meaning or replace its manifest identity.",
+      "statement": "A strict attached distribution of one Semantic Artifact as a visible directory whose work-specific name ends in .sa and whose root contains semantic-artifact.jsonld, knowledge.jsonld and history.jsonld with those exact role names. The manifest is the package marker and declares identity, release, governance, profile, components and optional supporting resources; filenames enable deterministic discovery while content types and structure prevent misclassification. Additional declared resources may be present without becoming canonical merely through inclusion. Tools may offer a separate content-aware import path for renamed loose files and then generate a normalised .sa package. For download or transfer, the directory may be losslessly serialized as <work-name>.sa.zip; a distribution descriptor and checksum may identify and verify that transport copy without becoming canonical content. The directory profile packages a Semantic Artifact but does not define its technology-neutral meaning or replace its manifest identity.",
       "status": "accepted",
       "review_status": "author-reviewed",
       "origin": "human",
@@ -19588,7 +19588,7 @@
         "manifest-discovery",
         "portable-exchange"
       ],
-      "version": 2
+      "version": 3
     },
     {
       "@id": "source:author-proposal-document-equivalent-and-token-efficiency-metrics",

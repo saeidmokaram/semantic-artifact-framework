@@ -10986,6 +10986,72 @@
         },
         "rationale": "Make the public entry self-contained, keep the initiation prompt minimal, and prevent general model analysis from being misrepresented as counterarguments contained in the work."
       }
+    },
+    {
+      "@id": "contribution:revised-decision-minimal-public-semantic-artifact-package-portable-distribution",
+      "@type": "ContributionEvent",
+      "target": "decision:minimal-public-semantic-artifact-package",
+      "event_type": "revised",
+      "actors": [
+        {
+          "contributor": "contributor:saeid-mokaram",
+          "role": "originator"
+        }
+      ],
+      "creation_method": "human",
+      "occurred_at": "2026-09-09",
+      "recorded_at": "2026-09-09",
+      "attribution_confidence": "explicit",
+      "basis": "direct-attribution",
+      "note": "The author approved automated, Git-independent distribution of the complete .sa directory as a verifiable transport archive while preserving one canonical semantic package.",
+      "version": 1,
+      "change": {
+        "fields": [
+          "statement",
+          "version"
+        ],
+        "before": {
+          "version": 2
+        },
+        "after": {
+          "version": 3
+        },
+        "rationale": "Allow clean direct retrieval of a complete Semantic Artifact without requiring repository access, while keeping the ZIP and descriptor outside canonical meaning."
+      }
+    },
+    {
+      "@id": "contribution:revised-concept-semantic-artifact-directory-package-portable-distribution",
+      "@type": "ContributionEvent",
+      "target": "concept:semantic-artifact-directory-package",
+      "event_type": "revised",
+      "actors": [
+        {
+          "contributor": "contributor:saeid-mokaram",
+          "role": "originator"
+        }
+      ],
+      "creation_method": "human",
+      "occurred_at": "2026-09-09",
+      "recorded_at": "2026-09-09",
+      "attribution_confidence": "explicit",
+      "basis": "direct-attribution",
+      "note": "Defines .sa.zip as a lossless transport serialization of the directory package and the distribution descriptor as noncanonical discovery and integrity metadata.",
+      "version": 1,
+      "change": {
+        "fields": [
+          "statement",
+          "version",
+          "package_profile.transport_serialization",
+          "package_profile.distribution_discovery"
+        ],
+        "before": {
+          "version": 2
+        },
+        "after": {
+          "version": 3
+        },
+        "rationale": "Provide a portable download form without redefining the .sa directory, introducing a second canonical store, or requiring Git as part of the technology-neutral Framework."
+      }
     }
   ]
 }

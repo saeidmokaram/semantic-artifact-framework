@@ -14,6 +14,8 @@ This repository contains the strict Semantic Artifact Directory Package `semanti
 
 When a chat or agent can read this repository's small files but cannot retrieve the large canonical knowledge or history files, use the generated agent-access projection at `https://saeidmokaram.github.io/semantic-artifact-framework/agent/`. Its HTML resources support browser-based readers and its parallel JSON resources support direct machine clients. Confirm its artifact identity and Git snapshot, use its type-sharded catalog to retrieve only the relevant object resources, and follow per-object history links when history is material. Verify the declared hashes when the canonical bytes are accessible; otherwise disclose reliance on the hash-bound projection. Treat every resource at that endpoint as a generated, noncanonical retrieval projection of the identified `.sa` package, not as another source of meaning. Report any inaccessible resource or integrity mismatch instead of filling the gap with assumptions.
 
+If Git retrieval is unavailable but the complete package can be downloaded, read `https://saeidmokaram.github.io/semantic-artifact-framework/downloads/distribution.json`, fetch its declared archive, verify the SHA-256 value, extract it without renaming its `.sa` root or required entries, and apply the normal loading sequence above. The ZIP file and distribution descriptor are transport resources; the extracted `.sa` directory retains the canonical package roles.
+
 ## Operating rules
 
 - Treat the represented work as the source of its claims; do not silently add model opinion or background knowledge.
