@@ -1,0 +1,91 @@
+name: Publish agent access projection
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: semantic-artifact-agent-access-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Build hash-bound access projection
+        run: |
+          python .github/scripts/build_agent_access.py \
+            --package semantic-artifact-framework.sa \
+            --output _site \
+            --base-url "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/agent" \
+            --repository-url "${{ github.server_url }}/${{ github.repository }}" \
+            --snapshot "${{ github.sha }}"
+
+      - name: Check generated entry and resources
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          site = Path("_site")
+          entry = json.loads((site / "agent/index.json").read_text())
+          catalog = json.loads((site / "agent/catalog/index.json").read_text())
+          assert entry["projection_status"] == "generated-noncanonical-access-projection"
+          assert entry["artifact"]["id"] == "work:from-documents-to-semantic-artifacts"
+          assert entry["counts"]["knowledge_objects"] == catalog["total_objects"]
+          checked = 0
+          for shard_ref in catalog["catalog_shards"]:
+              shard_name = shard_ref["url"].rsplit("/", 1)[-1]
+              shard = json.loads((site / "agent/catalog" / shard_name).read_text())
+              assert shard_ref["count"] == len(shard["objects"])
+              for item in shard["objects"]:
+                  name = item["object_url"].rsplit("/", 1)[-1]
+                  assert (site / "agent/objects" / name).is_file()
+                  if "history_url" in item:
+                      history_name = item["history_url"].rsplit("/", 1)[-1]
+                      assert (site / "agent/history" / history_name).is_file()
+                  checked += 1
+          assert checked == catalog["total_objects"]
+          print(f"Checked {checked} indexed object resources")
+          PY
+
+      - name: Configure GitHub Pages
+        if: github.event_name != 'pull_request'
+        uses: actions/configure-pages@v5
+
+      - name: Upload GitHub Pages artifact
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+
+  deploy:
+    if: github.event_name != 'pull_request'
+    needs: build
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Deploy GitHub Pages artifact
+        id: deployment
+        uses: actions/deploy-pages@v4
