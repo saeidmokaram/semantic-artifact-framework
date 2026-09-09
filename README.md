@@ -20,17 +20,15 @@ The canonical artifact is contained by [`semantic-artifact-framework.sa/`](seman
 
 [`AGENTS.md`](AGENTS.md) and this README are concise host-platform access adapters. [`validation/saf-core.shacl.ttl`](semantic-artifact-framework.sa/validation/saf-core.shacl.ttl) contains proposed structural constraints. [`LICENSE`](LICENSE) states the reuse and attribution terms. None is an additional source of the work's substantive meaning.
 
-## Load it
+## Use it with an AI assistant
 
-Give an agent the repository URL and ask it to:
+[`AGENTS.md`](AGENTS.md) is the provider-neutral instruction and loading entry point. Some coding agents discover this filename automatically, but general AI chats may not. Give the assistant this repository URL and use the following instruction:
 
-1. locate the `*.sa` directory and read its `semantic-artifact.jsonld`;
-2. follow its `reader_policy`;
-3. retrieve the relevant objects from `knowledge.jsonld`;
-4. consult `history.jsonld` when origin, review, change or authority matters; and
-5. distinguish represented knowledge from any new derivation or external context.
+> Load this repository as a Semantic Artifact. Read `AGENTS.md` first and follow its loading sequence and operating rules. Treat the `.sa` package as the represented work and the README as orientation only. Do not fill an inaccessible file or missing knowledge with assumptions; tell me what you could not access. After loading, identify the artifact you found and ask what I want to understand, compare, project or develop.
 
-An agent that cannot fetch a repository can use the `.sa` directory directly. A new artifact can begin as `<work-name>.sa/` with the same three fixed entry names, a new identity and governance profile, and work-specific knowledge and history. Loose renamed files are import material, not a conforming strict package, until normalised.
+If the assistant cannot read a public repository, upload `AGENTS.md` together with the complete `semantic-artifact-framework.sa/` directory, or upload its three required files while preserving their names and roles. No particular AI provider, model or chat product is required.
+
+To start a new artifact, copy the `.sa` directory structure as `<work-name>.sa/`, assign a new identity and governance profile, and replace the canonical knowledge and history with records belonging to the new work. Loose renamed files are import material, not a conforming strict package, until normalised.
 
 ## Important boundaries
 
