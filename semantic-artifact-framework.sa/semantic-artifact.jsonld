@@ -140,7 +140,9 @@
     "recognition": "A strict attached package is a visible directory whose name ends in .sa and which contains the three exact required entry names at its root.",
     "content_validation": "A required filename is not sufficient: each entry must parse as JSON-LD and declare or structurally satisfy its assigned semantic role.",
     "additional_entries": "Additional declared resources are permitted and do not become canonical knowledge merely by being present.",
-    "loose_file_import": "Tools may recognise renamed files from content as a migration convenience, but must normalise them before representing the result as a conforming directory package."
+    "loose_file_import": "Tools may recognise renamed files from content as a migration convenience, but must normalise them before representing the result as a conforming directory package.",
+    "transport_serialization": "A conforming .sa directory may be transported as a ZIP file named <work-name>.sa.zip when extraction restores the unchanged work-named .sa root and its required entries. The archive is a transport serialization, not another canonical store.",
+    "distribution_discovery": "A host may publish a noncanonical machine-readable distribution descriptor containing artifact identity, snapshot, archive URL, media type, byte size, member list and cryptographic hash so clients can retrieve and verify the complete package without Git."
   },
   "conformance_shapes": "validation/saf-core.shacl.ttl",
   "cross_artifact_policy": {

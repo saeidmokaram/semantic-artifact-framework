@@ -8,12 +8,15 @@ import hashlib
 import html
 import json
 import re
+import zipfile
 from collections import defaultdict
 from pathlib import Path
 from typing import Any
+from urllib.parse import quote
 
 
-PROJECTION_VERSION = "0.2.0"
+PROJECTION_VERSION = "0.3.0"
+DISTRIBUTION_VERSION = "0.1.0"
 REQUIRED_FILES = (
     "semantic-artifact.jsonld",
     "knowledge.jsonld",
@@ -66,6 +69,28 @@ def file_hash(path: Path) -> str:
         for block in iter(lambda: handle.read(1024 * 1024), b""):
             digest.update(block)
     return digest.hexdigest()
+
+
+def write_reproducible_package_archive(package: Path, archive: Path) -> list[str]:
+    """Write stable package bytes without filesystem timestamps or permissions."""
+    members: list[str] = []
+    archive.parent.mkdir(parents=True, exist_ok=True)
+    with zipfile.ZipFile(
+        archive, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=9
+    ) as handle:
+        for source in sorted(package.rglob("*")):
+            if source.is_symlink():
+                raise SystemExit(f"package archives must not contain symbolic links: {source}")
+            if not source.is_file():
+                continue
+            member = (Path(package.name) / source.relative_to(package)).as_posix()
+            info = zipfile.ZipInfo(member, date_time=(1980, 1, 1, 0, 0, 0))
+            info.compress_type = zipfile.ZIP_DEFLATED
+            info.create_system = 3
+            info.external_attr = 0o100644 << 16
+            handle.writestr(info, source.read_bytes(), compresslevel=9)
+            members.append(member)
+    return members
 
 
 def resource_name(identifier: str) -> str:
@@ -180,6 +205,48 @@ def main() -> None:
     agent_root = output / "agent"
     object_root = agent_root / "objects"
     history_root = agent_root / "history"
+    downloads_root = output / "downloads"
+
+    archive_filename = f"{package.name}.zip"
+    archive_path = downloads_root / archive_filename
+    archive_members = write_reproducible_package_archive(package, archive_path)
+    archive_sha256 = file_hash(archive_path)
+    public_root_url = base_url.rsplit("/", 1)[0]
+    package_download_url = f"{public_root_url}/downloads/{quote(archive_filename)}"
+    distribution_url = f"{public_root_url}/downloads/distribution.json"
+    checksum_url = f"{public_root_url}/downloads/SHA256SUMS"
+    distribution = {
+        "distribution_type": "SemanticArtifactDirectoryPackageDistribution",
+        "distribution_version": DISTRIBUTION_VERSION,
+        "distribution_status": "generated-transport-archive",
+        "notice": (
+            "The ZIP file is a transport serialization of the identified canonical "
+            ".sa directory. Extract it without renaming its root or required entries."
+        ),
+        "artifact": {
+            "id": manifest.get("@id"),
+            "title": manifest.get("title"),
+            "format": manifest.get("format"),
+            "format_version": manifest.get("format_version"),
+        },
+        "artifact_snapshot": args.snapshot,
+        "package": {
+            "directory_name": package.name,
+            "archive_filename": archive_filename,
+            "media_type": "application/zip",
+            "download_url": package_download_url,
+            "sha256": archive_sha256,
+            "size_bytes": archive_path.stat().st_size,
+            "member_count": len(archive_members),
+            "members": archive_members,
+        },
+        "checksum_url": checksum_url,
+        "repository_url": repository_url,
+    }
+    write_json(downloads_root / "distribution.json", distribution)
+    (downloads_root / "SHA256SUMS").write_text(
+        f"{archive_sha256}  {archive_filename}\n", encoding="utf-8"
+    )
 
     knowledge_context = knowledge.get("@context", {})
     history_context = history.get("@context", {})
@@ -324,6 +391,10 @@ def main() -> None:
         "manifest_web_url": f"{base_url}/manifest.html",
         "catalog_url": f"{base_url}/catalog/index.json",
         "catalog_web_url": f"{base_url}/catalog/",
+        "package_distribution_url": distribution_url,
+        "package_download_url": package_download_url,
+        "package_archive_sha256": archive_sha256,
+        "package_archive_size_bytes": archive_path.stat().st_size,
         "root_object_url": object_urls.get(str(root_id)),
         "root_object_web_url": object_web_urls.get(str(root_id)),
         "canonical_files": [
@@ -360,6 +431,7 @@ def main() -> None:
             "For claims, counterarguments, evidence or risks, use represented objects and include their IDs in a compact trace; do not substitute newly generated analysis.",
             "Label new reasoning as DERIVATION with its input object IDs; label outside material as EXTERNAL CONTEXT.",
             "Preserve explicit gaps, uncertainty, disagreement and superseded state; report inaccessible required resources.",
+            "If repository access is unavailable and complete package retrieval is required, use package_distribution_url, verify the archive SHA-256, and preserve the .sa directory boundary after extraction.",
         ],
     }
 
@@ -472,6 +544,8 @@ def main() -> None:
             ("manifest_web_url", "Manifest"),
             ("catalog_web_url", "Object catalog"),
             ("root_object_web_url", "Root work object"),
+            ("package_download_url", "Download complete .sa package (.zip)"),
+            ("package_distribution_url", "Package distribution descriptor"),
         )
         if entry.get(link_key)
     )
@@ -502,7 +576,10 @@ def main() -> None:
         + f"Web entry: {base_url}/\n"
         + f"JSON entry: {base_url}/index.json\n"
         + f"Catalog: {base_url}/catalog/\n"
-        + f"Manifest: {base_url}/manifest.html\n",
+        + f"Manifest: {base_url}/manifest.html\n"
+        + f"Package download: {package_download_url}\n"
+        + f"Distribution descriptor: {distribution_url}\n"
+        + f"SHA-256 checksums: {checksum_url}\n",
         encoding="utf-8",
     )
     (output / ".nojekyll").write_text("", encoding="utf-8")
@@ -518,6 +595,7 @@ def main() -> None:
         "and integrity hashes.</p>"
         f"<p><a href=\"agent/\">Agent entry</a> · "
         f"<a href=\"agent/catalog/\">Object catalog</a> · "
+        f"<a href=\"downloads/{html.escape(quote(archive_filename))}\">Download complete .sa package</a> · "
         f"<a href=\"llms.txt\">Plain-text instructions</a> · "
         f"<a href=\"{html.escape(repository_url)}\">Canonical repository</a></p>"
         "<h2>Minimal instruction</h2><blockquote>"
