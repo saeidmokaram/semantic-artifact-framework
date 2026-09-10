@@ -11052,6 +11052,41 @@
         },
         "rationale": "Provide a portable download form without redefining the .sa directory, introducing a second canonical store, or requiring Git as part of the technology-neutral Framework."
       }
+    },
+    {
+      "@id": "contribution:released-work-from-documents-to-semantic-artifacts-v0.1.0",
+      "@type": "ContributionEvent",
+      "target": "work:from-documents-to-semantic-artifacts",
+      "event_type": "released",
+      "actors": [
+        {
+          "contributor": "contributor:saeid-mokaram",
+          "role": "originator"
+        }
+      ],
+      "creation_method": "human",
+      "occurred_at": "2026-09-10",
+      "recorded_at": "2026-09-10",
+      "attribution_confidence": "explicit",
+      "basis": "author-approved-public-release",
+      "note": "Records the author's preparation of Semantic Artifact Framework release 0.1.0 as a persistently identified public research output.",
+      "version": 1,
+      "change": {
+        "fields": [
+          "artifact_release",
+          "url",
+          "version"
+        ],
+        "before": {
+          "version": 10
+        },
+        "after": {
+          "artifact_release": "0.1.0",
+          "url": "https://doi.org/10.5281/zenodo.22686469",
+          "version": 11
+        },
+        "rationale": "Bind the first public framework release to a stable version and reserved Zenodo DOI while preserving its proposal maturity status."
+      }
     }
   ]
 }

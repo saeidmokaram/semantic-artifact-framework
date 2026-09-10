@@ -2,6 +2,8 @@
 
 **From Documents to Semantic Artifacts, by Saeid Mokaram**
 
+Release 0.1.0: [https://doi.org/10.5281/zenodo.22686469](https://doi.org/10.5281/zenodo.22686469)
+
 The framework proposes a knowledge-first form for human, agentic and mixed work. Instead of treating a document, report, paper or README as the primary container, a represented work maintains a governed semantic artifact containing its knowledge, evidence, questions, decisions, alternatives, attempts, failures, interpretations, provenance and history. Documents and interfaces are generated as purpose-specific projections; code, designs, actions and other consequential outputs are traceable derivatives.
 
 > The document becomes a view, not the sole boundary of the represented knowledge.
@@ -53,3 +55,7 @@ These tools are independently versioned semantic artifacts. The framework does n
 ## Licence
 
 Unless a source record says otherwise, the original semantic content and specification material are available under [CC BY 4.0](LICENSE). Commercial and non-commercial use and adaptation are permitted with appropriate credit to Saeid Mokaram, a link to the licence and identification of material changes.
+
+## Cite
+
+Mokaram, Saeid. (2026). *Semantic Artifact Framework: From Documents to Semantic Artifacts* (Version 0.1.0). Zenodo. [https://doi.org/10.5281/zenodo.22686469](https://doi.org/10.5281/zenodo.22686469)

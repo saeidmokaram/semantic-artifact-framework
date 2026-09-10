@@ -112,6 +112,8 @@
   "@id": "work:from-documents-to-semantic-artifacts",
   "@type": "saf:SemanticArtifact",
   "title": "From Documents to Semantic Artifacts",
+  "artifact_release": "0.1.0",
+  "url": "https://doi.org/10.5281/zenodo.22686469",
   "format": "semantic-artifact-directory-package",
   "format_version": "0.3.0-proposal",
   "format_status": "The work is an idea and proposal originally presented in semantic knowledge form; the repository-local representation is one non-normative implementation",
