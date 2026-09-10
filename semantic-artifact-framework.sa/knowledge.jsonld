@@ -116,6 +116,8 @@
       "@id": "work:from-documents-to-semantic-artifacts",
       "@type": "Work",
       "label": "From Documents to Semantic Artifacts",
+      "artifact_release": "0.1.0",
+      "url": "https://doi.org/10.5281/zenodo.22686469",
       "statement": "An idea and research proposal by Saeid Mokaram, originally presented in semantic knowledge form, proposing a generic semantic-artifact specification in which the primary reusable outcome of human, agentic, or mixed work is a governed, scope-bounded record of the available journey—from raw data, setup, code, trials, errors, discussions, and relationships to observations, interpretations, conclusions, decisions, provenance, history, and explicit gaps. The work proposes that AI can expand the practical capture frontier by helping retain, structure, connect, and retrieve more first-hand and process-level material than final-document workflows normally preserve. Source records, asserted facts, and attributed perspectives coexist, allowing later people or agents to inspect the represented evidence, distinguish it from an author's interpretation, and reconstruct and re-examine the recorded journey rather than inheriting only its final narrative. This is epistemic reconstruction, not literal reproduction of uncaptured context or subjective experience. Documents, images, interfaces, handovers, executable artifacts, solutions, and other outputs are purpose-specific projections or traceable derivatives rather than independent canonical containers. Publication is one application profile, and independently governed artifacts may be federated for collaboration without silently collapsing identity, authority, disagreement, or missingness. At its broadest, the work presents this as a candidate historical shift in humanity's knowledge medium and in the collaboration interface among people and machines; that significance is a thesis to investigate, not an established result of the current semantic self-demonstration.",
       "status": "working-thesis",
       "review_status": "author-reviewed",
@@ -342,7 +344,7 @@
         "knowledge-medium",
         "historical-shift"
       ],
-      "version": 10,
+      "version": 11,
       "metadata": {
         "author": "contributor:saeid-mokaram"
       }
